@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MPlayer</string>
+    <string name="taco_hemingway">Taco Hemingway</string>
+    <string name="marmur">Marmur</string>
+    <string name="wosk">WOSK</string>
+    <string name="szczerze">Szczerze</string>
+    <string name="deszcz">Deszcz na betonie</string>
+    <string name="prostokaty">Świecące prostokąty</string>
 </resources>
