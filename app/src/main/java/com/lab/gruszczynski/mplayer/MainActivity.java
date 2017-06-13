@@ -33,17 +33,13 @@ public class MainActivity extends AppCompatActivity {
         context = getApplicationContext();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
         mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
         recyclerView.addItemDecoration(mDividerItemDecoration);
 
-        // specify an adapter (see also next example)
         adapter = new TrackAdapter(getTrackSet(), getApplicationContext());
         recyclerView.setAdapter(adapter);
 

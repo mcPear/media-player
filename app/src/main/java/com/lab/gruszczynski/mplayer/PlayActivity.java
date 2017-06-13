@@ -3,6 +3,8 @@ package com.lab.gruszczynski.mplayer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,12 +33,14 @@ public class PlayActivity extends AppCompatActivity {
     private Handler mHandler;
     private Activity mainActivity;
     private  Runnable mediaPlayerRunnable;
+    private Intent intent;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+        this.intent = intent;
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         rewind = (ImageButton) findViewById(R.id.rewindBtn);
         forward = (ImageButton) findViewById(R.id.forwardBtn);
@@ -47,7 +51,7 @@ public class PlayActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.playerTitleTV);
         context = this;
 
-        Intent intent = getIntent();
+        intent = getIntent();
         rewind.setImageDrawable(getDrawable(R.drawable.ic_fast_rewind_black_24dp));
         rewind.setOnClickListener(new RewindClickListener(this));
         forward.setImageDrawable(getDrawable(R.drawable.ic_fast_forward_black_24dp));
@@ -61,7 +65,16 @@ public class PlayActivity extends AppCompatActivity {
         sound = intent.getIntExtra("sound", 0);
         seekBar.setOnSeekBarChangeListener(new SeekBarListener());
         mHandler = new Handler();
-
+        if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE){
+            Drawable coverDrawable = getDrawable(intent.getIntExtra("cover", 0));
+            coverDrawable.setAlpha(100);
+            cover.setImageDrawable(coverDrawable);
+        }
+        else{
+            Drawable coverDrawable = getDrawable(intent.getIntExtra("cover", 0));
+            coverDrawable.setAlpha(255);
+            cover.setImageDrawable(coverDrawable);
+        }
         mediaPlayer = MediaPlayer.create(this, sound);
         seekBar.setMax(mediaPlayer.getDuration());
         mediaPlayerRunnable = new Runnable() {
@@ -100,18 +113,6 @@ public class PlayActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, sound);
         runOnUiThread(mediaPlayerRunnable);
         super.onResume();
-    }
-
-    private void play(){
-        if(mediaPlayer!=null) {
-            mediaPlayer.start();
-        }
-    }
-
-    private  void stop(){
-        if(mediaPlayer!=null) {
-            mediaPlayer.stop();
-        }
     }
 
     private class PlayPauseClickListener implements View.OnClickListener {
@@ -182,12 +183,13 @@ public class PlayActivity extends AppCompatActivity {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-
+            mHandler.removeCallbacks(mediaPlayerRunnable);
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             mediaPlayer.seekTo(seekBar.getProgress());
+            runOnUiThread(mediaPlayerRunnable);
         }
     }
 

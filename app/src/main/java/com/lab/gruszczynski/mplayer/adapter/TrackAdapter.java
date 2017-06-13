@@ -39,25 +39,16 @@ public class TrackAdapter extends RecyclerView.Adapter<TrackAdapter.ViewHolder> 
     @Override
     public TrackAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
-        /*// create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.my_text_view, parent, false);
-        // set the view's size, margins, paddings and layout parameters
-        ...
-        ViewHolder vh = new ViewHolder();
-        return vh;*/
         RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.track_list_row, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return  vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        //holder.mTextView.setText(mDataset[position]);
         TextView albumTV = (TextView) holder.relativeLayout.findViewById(R.id.albumTV);
         TextView performerTV = (TextView) holder.relativeLayout.findViewById(R.id.performerTV);
         TextView titleTV = (TextView) holder.relativeLayout.findViewById(R.id.titleTV);

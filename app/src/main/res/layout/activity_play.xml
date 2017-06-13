@@ -31,6 +31,7 @@
             android:id="@+id/playPauseBtn" app:layout_constraintRight_toLeftOf="@+id/forwardBtn"
             android:layout_marginEnd="8dp" android:layout_marginStart="8dp"
             app:layout_constraintLeft_toRightOf="@+id/rewindBtn" app:layout_constraintBottom_toTopOf="@+id/seekBar"
+            android:elevation="2dp"
             android:layout_marginBottom="8dp"/>
     <ImageView
             android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintRight_toRightOf="parent" android:layout_marginStart="16dp"
             app:layout_constraintLeft_toLeftOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/playerTitleTV"/>
+            app:layout_constraintTop_toBottomOf="@+id/playerTitleTV"
+            app:layout_constraintBottom_toTopOf="@+id/playerPerformerTV" android:layout_marginBottom="8dp"/>
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
@@ -63,7 +65,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/playerPerformerTV"
             android:layout_marginEnd="16dp" app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginStart="16dp" app:layout_constraintLeft_toLeftOf="parent" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/playerCoverIV" app:layout_constraintVertical_bias="1.0"
+            android:layout_marginStart="16dp" app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/playerAlbumTV" android:layout_marginBottom="8dp"/>
 </android.support.constraint.ConstraintLayout>
